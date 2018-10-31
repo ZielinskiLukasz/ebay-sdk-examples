@@ -49,8 +49,22 @@ $service = new Services\ProductMetadataService([
  */
 $request = new Types\GetCompatibilitySearchValuesRequest();
 $request->categoryId = '33567';
-$request->propertyName = 'Make';
+$request->propertyName = 'Model';
 $request->listFormatOnly = true;
+
+/**
+ * Use a property filter for Make to retrieve the models for a specific make
+ */
+$propertyFilter = new Types\PropertyValue();
+$propertyFilter->propertyName = 'Make';
+$stringValue = new Types\StringValue();
+$stringValue->value = 'Acura';
+$value = new Types\Value();
+$value->text = $stringValue;
+$propertyFilter->value = [$value];
+$filters[] = $propertyFilter;
+
+$request->propertyFilter = $filters;
 
 /**
  * Send the request.
